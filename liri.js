@@ -44,3 +44,21 @@ if (first === "spotify-this-song") {
         console.log(data);
     });
 }
+
+// OMDB API
+var request = require('request');
+var queryUrl = "http://www.omdbapi.com/?t=" + second + "&y=&plot=short&apikey=trilogy";
+
+
+// This line is just to help us debug against the actual URL.
+console.log(queryUrl);
+
+if (first === "movie-this") {
+    request(queryUrl, function (error, response, body) {
+
+        if (!error && response.statusCode === 200) {
+
+            console.log("The movie's Release Year is: " + JSON.parse(body).Released);
+        }
+    });
+}
