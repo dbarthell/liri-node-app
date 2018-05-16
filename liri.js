@@ -35,8 +35,10 @@ if (first === "spotify-this-song") {
         if (err) {
             return console.log('Error occurred: ' + err);
         }
-
-        console.log(data.tracks);
+        // for(var i = 0; i < data.tracks.items.length; i++) {
+        //     console.log(data.tracks.items[i]);
+        // }
+        console.log(data.tracks.items[0].artists);
     });
 }
 
