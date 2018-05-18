@@ -18,7 +18,12 @@ if (first === "my-tweets") {
     var params = { screen_name: 'DanBarthell' };
     client.get('statuses/user_timeline', params, function (error, tweets, response) {
         if (!error) {
-            console.log(tweets);
+            for (i = 0; i < tweets.length; i++) {
+                console.log(tweets[i].user.name);
+                console.log(tweets[i].created_at);
+                console.log(tweets[i].text);
+                console.log("===============================================");
+            }
         }
     });
 }
@@ -30,15 +35,29 @@ var spotify = new Spotify({
     secret: process.env.SPOTIFY_SECRET
 });
 
-if (first === "spotify-this-song") {
+if (first === "spotify-this-song" && second !== null) {
     spotify.search({ type: 'track', query: second }, function (err, data) {
         if (err) {
             return console.log('Error occurred: ' + err);
         }
-        // for(var i = 0; i < data.tracks.items.length; i++) {
-        //     console.log(data.tracks.items[i]);
-        // }
-        console.log(data.tracks.items[0].artists);
+        for (var i = 0; i < data.tracks.items.length; i++) {
+            console.log(data.tracks.items[i].artists);
+            console.log(data.tracks.items[i].name);
+            console.log("===============================================");
+        }
+    });
+}
+
+if (first === "spotify-this-song" && second === null) {
+    spotify.search({ type: 'track', query: "The Sign" }, function (err, data) {
+        if (err) {
+            return console.log('Error occurred: ' + err);
+        }
+        for (var i = 0; i < data.tracks.items.length; i++) {
+            console.log(data.tracks.items[i].artists);
+            console.log(data.tracks.items[i].name);
+            console.log("===============================================");
+        }
     });
 }
 
@@ -52,13 +71,13 @@ if (first === "movie-this") {
         if (!error && response.statusCode === 200) {
             console.log("===============================================");
             console.log(JSON.parse(body).Title);
-            console.log(JSON.parse(body).Year);            
+            console.log(JSON.parse(body).Year);
             console.log(JSON.parse(body).Ratings[0].Value);
-            console.log(JSON.parse(body).Ratings[1].Value);            
+            console.log(JSON.parse(body).Ratings[1].Value);
             console.log(JSON.parse(body).Country);
             console.log(JSON.parse(body).Language);
             console.log(JSON.parse(body).Actors);
-            console.log(JSON.parse(body).Plot);  
+            console.log(JSON.parse(body).Plot);
             console.log("===============================================");
         }
     });
